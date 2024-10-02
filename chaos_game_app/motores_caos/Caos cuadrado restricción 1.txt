@@ -1,0 +1,69 @@
+// Caos cuadrado restricción 1
+function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+}// Triángulo de Sierpinski
+let frameCount = 0;
+let points = []; // Array to store generated points
+const factor = 1/3; // Factor for calculating new point position (0.5 for Sierpinski triangle)
+let vertices = []; // Array to store vertices of the polygon
+
+function setup() {
+  createCanvas(600, 600);
+  background(0);
+
+  // Define vertices of the polygon
+  vertices.push(createVector(0, height));
+  vertices.push(createVector(width, height));
+  vertices.push(createVector(width, 0));
+  vertices.push(createVector(0,0));
+  vertices.push(createVector(width/2,height/2));
+  
+
+  // Random starting point within the polygon (optional)
+  let startingPoint = createVector(random(width), random(height));
+  points.push(startingPoint);
+}
+
+function draw() {
+  if (frameCount < 1000) {
+    console.log(frameCount);
+    frameRate(80) //Número de capas que genera por segundo (modifica la velocidad)
+    // Generate points
+    for (let i = 0; i < 100; i++) { // Generate 100 points per frame (adjust for speed)
+    //let newPoint = createVector();
+    //let randomVertex = floor(random(vertices.length)); // Pick a random vertex
+    //let currentPoint = points[points.length - 1]; // Get the last generated point
+
+    //newPoint.x = currentPoint.x * factor + vertices[randomVertex].x * (1 - factor);
+    //newPoint.y = currentPoint.y * factor + vertices[randomVertex].y * (1 - factor);
+
+    //points.push(newPoint);
+      
+//////////////////////
+      let newPoint = createVector(0,0);
+            //let lastPoint = this.points[this.points.length - 1]; // Get the last generated point
+      let randomVertex = floor(random()*(vertices.length)); // Pick a random vertex
+      let currentPoint = points[points.length - 1]; // Get the last generated point
+            
+      newPoint.x = currentPoint.x * factor + vertices[randomVertex].x * (1 - factor);
+      newPoint.y = currentPoint.y * factor + vertices[randomVertex].y * (1 - factor);
+
+
+      points.push(newPoint);
+  
+  }
+
+  // Draw all generated points
+  stroke(255);
+  for (let point of points) {
+    fill(255); // Set fill color to white (optional)
+    ellipse(point.x, point.y, 1, 1); // Draw a small ellipse at the point
+
+  }
+frameCount++;
+  }
+}
