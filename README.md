@@ -8,14 +8,14 @@ Este trabajo se divide en dos sub-proyectos:
 
 ## Representación del Juego del Caos
 ### Generadores para el análisis de las CGR's
-[Generador de imágenes]()
-[Generador de coordenadas]()
-[Calculadora de dimensiones]()
-[Calculadora de frecuencias de k-meros]()
-[Simulador de secuencias]()
+* [Generador de imágenes]()
+* [Generador de coordenadas]()
+* [Calculadora de dimensiones]()
+* [Calculadora de frecuencias de k-meros]()
+* [Simulador de secuencias]()
 
 ## App del Juego del Caos
-[Código fuente]()
+* [Código fuente]()
 
 
 
