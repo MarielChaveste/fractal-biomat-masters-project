@@ -1,0 +1,64 @@
+// Caos polígono regular con restricción de no poder escoger el mismo vértice que el anterior
+let points = [];
+let current;
+let factor = 0.667;
+let frameCount = 0;
+let prevIndex;
+let sides = 7; // número de lados del polígono
+
+function setup() {
+  createCanvas(700, 700);
+  
+  let radius = 300; // Radio del círculo en el que inscribir el pentágono
+  let centerX = width / 2; // Centro del pentágono en el eje X
+  let centerY = height / 2; // Centro del pentágono en el eje Y
+  
+  // Definir los vértices del pentágono
+  for (let i = 0; i < sides; i++) {
+    let angle = TWO_PI * i / sides; // Divide el círculo en 5 partes iguales
+    let x = centerX + radius * cos(angle);
+    let y = centerY + radius * sin(angle);
+    points.push(createVector(x, y));
+  }
+  
+  // Iniciar en un punto aleatorio dentro del canvas
+  current = createVector(random(width), random(height));
+  stroke(255);
+  strokeWeight(2);
+  background(0);
+  
+  // Dibujar los vértices del pentágono
+  for (let pt of points) {
+    point(pt.x, pt.y);
+  }
+  
+  // Inicializar el índice anterior a un valor inválido
+  prevIndex = -1;
+}
+
+function draw() {
+  if (frameCount < 400) {
+    for (let i = 0; i < 100; i++) {
+      let nextIndex;
+      
+      // Asegurarse de que el vértice elegido no sea el mismo que el anterior
+      do {
+        nextIndex = floor(random(points.length));
+      } while (nextIndex === prevIndex);
+      
+      let next = points[nextIndex];
+
+      // Moverse a la mitad de la distancia hacia el vértice elegido
+      current.x = lerp(current.x, next.x, factor);
+      current.y = lerp(current.y, next.y, factor);
+
+      // Dibujar el nuevo punto
+      strokeWeight(1);
+      ellipse(current.x, current.y, 1, 1);
+      
+      // Actualizar el índice anterior
+      prevIndex = nextIndex;
+    }
+    frameCount++;
+  }
+}
